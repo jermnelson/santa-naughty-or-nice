@@ -1,0 +1,60 @@
+<style>
+ #santa-list { 
+   font-family: 'Brush Script MT', cursive;
+
+ }
+ #santa-list article {
+   background-color: #FFE97F;
+ }
+</style>
+<section id="santa-list">
+  <article class="col-md-6">
+    <h1>Naugthy List</h1>
+    <div class="row">
+      <children-column params="names: getNames('naughty', 0)"></children-column>
+      <children-column params="names: getNames('naughty', 1)"></children-column>
+    </div>
+  </article>
+  <article class="col-md-6">
+    <h1>Nice List</h1>
+    <div class="row">
+      <children-column params="names: getNames('nice', 0)"></children-column>
+      <children-column params="names: getNames('nice', 1)"></children-column>
+    </div>
+  </article>
+</section>
+<script>
+  ko.components.register('children-column', {
+    viewModel: function(params) {  
+       this.names = params.names;
+       this.type = params.type; // Should be naughty or nice 
+    },
+    template:
+      '<section class="col-md-6">\
+        <ul data-bind="foreach: names">\
+          <li data-bind="text: name"></li>\
+        </ul>\
+      </section>'
+  });
+
+  function Child(name, type) {
+    this.name = name;
+    this.type = type
+  }
+
+  function SantaListViewModel() {
+    this.naughtyChildren = [];
+    this.niceChildren = [];
+    this.getNames = function(type, column) {
+       if(type.search('naughty')) {
+          var naughtyLength = this.naughtyChildren.length;
+          if(column == 0) {
+              return this.naughtyChildren.slice(0, naughtyLength / 2.0);
+          else:
+              return this.naughtyChildren.slice(naughtyLength / 2.0, )
+
+          }
+       }    
+    }
+  }
+</script>
